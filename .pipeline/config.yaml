@@ -1,0 +1,40 @@
+#Project Setup
+general:
+  unsafeMode: false
+  automaticVersioning: true
+  collectTelemetryData: false
+  projectName: "sapui5-reference-app"
+  pipeline: "sap-ui5-neo"
+  
+steps:
+  mtaBuild:
+    mtaBuildTool: cloudMbt
+    applicationName: "testapp"
+    
+  tmsUpload:
+    nodeName: "testpipeline"
+    credentialsId: "servicekey-tms"
+    description: "job1"
+    verbose: true  
+    
+  neoDeploy:
+    neo:
+      deployAccount: "v0iw5e4dx3" 
+      deployHost: "eu1.hana.ondemand.com"
+      credentialsId: "oauth-credential"
+      
+  cloudFoundryDeploy:
+    cloudFoundry:
+      apiEndpoint: "https://api.cf.eu10.hana.ondemand.com"
+      org: "CLOUDCI_cicddev"
+      space: "d070410-dev"
+      credentialsId: "sapui5cf-deploy-user"
+      deployTool: "mtaDeployPlugin"    
+    
+  karmaExecuteTests:
+    runCommand: "npm test"
+    dockerImage: "docker.wdf.sap.corp:50000/com.sap.concise.jenkins/mta-agent:0.20"
+    stashContent: []
+
+
+  
