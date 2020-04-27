@@ -8,6 +8,8 @@
     "@sap/grunt-sapui5-bestpractice-test": "2.0.1"
   },
   "scripts": {
-    "test": "grunt unit_and_integration_tests"
+    "test": "grunt unit_and_integration_tests",
+    "build": "ui5 build --a",
+    "linting": "eslint ."
   }
 }
